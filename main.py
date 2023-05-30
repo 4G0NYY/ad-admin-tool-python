@@ -2,15 +2,20 @@ import tkinter as tk
 import csv
 from pyad import *
 
-import pyad.pyadexceptions
-
 def connect_to_active_directory():
+    domain = domain_entry.get()
+    username = username_entry.get()
+    password = password_entry.get()
+
     try:
-        # Code to connect to Active Directory server
-        pass
+        # Connect to Active Directory server
+        pyad.set_defaults(ldap_server=domain)
+        pyad.aduser.ADUser(username=username, password=password)
+        result_label.config(text="Connected successfully!")
     except pyad.pyadexceptions.AuthenticationError:
-        # Bypass the authentication error
-        print("Authentication failed. Bypassing error for testing purposes.")
+        result_label.config(text="Authentication failed!")
+    except pyad.pyadexceptions.ADException as e:
+        result_label.config(text=str(e))
 
 def create_user():
     username = username_entry.get()
