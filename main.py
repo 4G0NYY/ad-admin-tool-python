@@ -1,9 +1,6 @@
 import tkinter as tk
-import pyad.adquery
-import pyad.aduser
 import csv
-import pyad.pyadexceptions
-import pyad.adcontainer
+from pyad import *
 
 import pyad.pyadexceptions
 
