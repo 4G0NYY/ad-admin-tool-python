@@ -1,6 +1,7 @@
 import tkinter as tk
 import pyad.adquery
 import pyad.aduser
+import csv
 
 def connect_to_active_directory():
     domain = domain_entry.get()
@@ -48,6 +49,29 @@ def delete_user():
     else:
         result_label.config(text="User not found!")
 
+def import_users_from_csv():
+    # Connect to Active Directory server
+    connect_to_active_directory()
+
+    # Open the CSV file
+    with open('users.csv', 'r') as csv_file:
+        # Create a CSV reader
+        reader = csv.reader(csv_file)
+
+        # Skip the header row
+        next(reader)
+
+        # Process each row in the CSV file
+        for row in reader:
+            username = row[0]
+            password = row[1]
+
+            # Create a user based on the data from the CSV file
+            create_user(username, password)
+
+    # Display a success message
+    result_label.config(text="Users imported successfully!")
+
 # Create the main window
 window = tk.Tk()
 window.title("Active Directory Tool")
@@ -68,6 +92,11 @@ password_label.pack()
 password_entry = tk.Entry(window, show="*")
 password_entry.pack()
 
+file_label = tk.Label(window, text="CSV File:")
+file_label.pack()
+file_entry = tk.Entry(window)
+file_entry.pack()
+
 result_label = tk.Label(window, text="")
 result_label.pack()
 
@@ -75,11 +104,13 @@ result_label.pack()
 connect_button = tk.Button(window, text="Connect", command=connect_to_active_directory)
 create_user_button = tk.Button(window, text="Create User", command=create_user)
 delete_user_button = tk.Button(window, text="Delete User", command=delete_user)
+import_button = tk.Button(window, text="Import Users", command=import_users_from_csv)
 
 # Position the buttons in the window
 connect_button.pack()
 create_user_button.pack()
 delete_user_button.pack()
+import_button.pack()
 
 # Start the main event loop
 window.mainloop()
