@@ -1,6 +1,13 @@
-import tkinter as tk
+import tkinter as tk        #import all the modules we need
 import csv
 from pyad import *
+import tkinter as tk
+import pyad.adquery
+import pyad.aduser
+import csv
+import pyad.pyadexceptions
+import pyad.adcontainer
+
 
 def connect_to_active_directory():
     domain = domain_entry.get()
