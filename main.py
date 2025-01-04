@@ -8,7 +8,7 @@ DOMAIN_SUFFIX = "@FUCK.OFF"  # Haha, ich hab das Skript am Samstag noch gemacht,
 def create_user(logonname, first_name, last_name, office_location):
     try:
         # Der UPN ist in unserem Fall immer der Logon name + der Domain Suffix
-        #user_upn = logonname + DOMAIN_SUFFIX
+        user_upn = logonname
         
         container = adcontainer.ADContainer.from_dn(OU_PATH)
         
@@ -17,7 +17,7 @@ def create_user(logonname, first_name, last_name, office_location):
             name=f"{first_name} {last_name}",
             container_object=container,
             password="Willk0mmen!",  # Ein Default-Passwort dass der Benutzer ohnehin beim ersten Login anpassen muss.
-            #upn=user_upn
+            user=user_upn
         )
         user.update_attribute("givenName", first_name)
         user.update_attribute("sn", last_name)
