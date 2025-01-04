@@ -34,11 +34,11 @@ def main():
         with open(csv_file, mode="r") as file: # Hier importieren wir all die Parameter vom CSV.
             reader = csv.DictReader(file)
             for row in reader:
-                logonname = row["logonname"]
+                #logonname = row["logonname"]
                 first_name = row["FirstName"]
                 last_name = row["LastName"]
                 office_location = row["OfficeLocation"]
-                create_user(logonname, first_name, last_name, office_location) # Und hier callen wir die Funktion welche den Benutzer dann erstellt.
+                create_user(first_name, last_name, office_location) # Und hier callen wir die Funktion welche den Benutzer dann erstellt.
     except FileNotFoundError:
         print(f"File {csv_file} not found.")
     except Exception as e:
