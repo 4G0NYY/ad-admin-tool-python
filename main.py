@@ -8,7 +8,7 @@ DOMAIN_SUFFIX = "@FUCK.OFF"  # Haha, ich hab das Skript am Samstag noch gemacht,
 def create_user(logonname, first_name, last_name, office_location):
     try:
         # Der UPN ist in unserem Fall immer der Logon name + der Domain Suffix
-        user_upn = logonname + DOMAIN_SUFFIX
+        #user_upn = logonname + DOMAIN_SUFFIX
         
         container = adcontainer.ADContainer.from_dn(OU_PATH)
         
@@ -17,14 +17,14 @@ def create_user(logonname, first_name, last_name, office_location):
             name=f"{first_name} {last_name}",
             container_object=container,
             password="Willk0mmen!",  # Ein Default-Passwort dass der Benutzer ohnehin beim ersten Login anpassen muss.
-            upn=user_upn
+            #upn=user_upn
         )
         user.update_attribute("givenName", first_name)
         user.update_attribute("sn", last_name)
         user.update_attribute("displayName", f"{first_name} {last_name}")
         user.update_attribute("physicalDeliveryOfficeName", office_location)
         user.enable()
-        print(f"User {user_upn} created successfully.") # Durch diese Statusmeldungen wissen wir stets an was das Skript gerade ist.
+        print(f"User {last_name} created successfully.") # Durch diese Statusmeldungen wissen wir stets an was das Skript gerade ist.
     except Exception as e:
         print(f"Failed to create user {logonname}: {e}") # Hier würden wir ausfindig machen welcher User Probleme beim erstellen bereitet.
 
