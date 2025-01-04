@@ -17,7 +17,7 @@ def create_user(logonname, first_name, last_name, office_location):
             name=f"{first_name} {last_name}",
             container_object=container,
             password="Willk0mmen!",  # Ein Default-Passwort dass der Benutzer ohnehin beim ersten Login anpassen muss.
-            logonname=user_upn
+            #logonname=user_upn
         )
         user.update_attribute("givenName", first_name)
         user.update_attribute("sn", last_name)
