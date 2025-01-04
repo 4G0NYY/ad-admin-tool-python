@@ -5,10 +5,10 @@ from pyad.adobject import ADObject
 OU_PATH = "OU=UsersByScript,DC=FUCK,DC=OFF" # Ich habe jetzt eine eigene OU erstellt, um sicher keine Konflikte zu kreiren.
 DOMAIN_SUFFIX = "@FUCK.OFF"  # Haha, ich hab das Skript am Samstag noch gemacht, ich hatte keine Zeit noch einen neuen Domain Controller aufzubauen und habe deswegen den hier genommen, deswegen das wüste Domain Suffix.
 
-def create_user(logonname, first_name, last_name, office_location):
+def create_user(first_name, last_name, office_location):
     try:
         # Der UPN ist in unserem Fall immer der Logon name + der Domain Suffix
-        user_upn = logonname
+        #user_upn = logonname
         
         container = adcontainer.ADContainer.from_dn(OU_PATH)
         
@@ -26,7 +26,7 @@ def create_user(logonname, first_name, last_name, office_location):
         user.enable()
         print(f"User {last_name} created successfully.") # Durch diese Statusmeldungen wissen wir stets an was das Skript gerade ist.
     except Exception as e:
-        print(f"Failed to create user {logonname}: {e}") # Hier würden wir ausfindig machen welcher User Probleme beim erstellen bereitet.
+        print(f"Failed to create user {last_name}: {e}") # Hier würden wir ausfindig machen welcher User Probleme beim erstellen bereitet.
 
 def main():
     csv_file = "users.csv"  # Pfad zum CSV-File
